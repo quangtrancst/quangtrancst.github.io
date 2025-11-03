@@ -1,87 +1,332 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-	<meta charset="utf-8">
-	<meta name="author" content="Quang Tran">
-	<meta name="description" content="My Resume Website">
-	<meta name="Country" content="VietNam">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/app.css">
-	<title>Quang Resume</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Đang Cập Nhật</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .container {
+            text-align: center;
+            padding: 2rem;
+            z-index: 10;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Icon container */
+        .icon-container {
+            margin-bottom: 2rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .spinner-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        .spinner-ring:nth-child(2) {
+            border-top-color: rgba(255, 255, 255, 0.6);
+            animation-delay: 0.2s;
+        }
+
+        .spinner-ring:nth-child(3) {
+            border-top-color: rgba(255, 255, 255, 0.3);
+            animation-delay: 0.4s;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Text content */
+        .content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            color: #f0f0f0;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Loading dots */
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            margin: 0 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes pulse {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Message */
+        .message {
+            color: #ffffff;
+            font-size: 1rem;
+            margin-top: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        @keyframes progress {
+            0% {
+                width: 0%;
+            }
+            50% {
+                width: 70%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+            }
+
+            .spinner {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-	<h1 id="menu_text">My Resume</h1>
-	<nav> 
-		<a href="#contact" class="menu_left">Contact</a>
-		<a href="#education" class="menu_left">Education</a>
-		<a href="#score" class="menu_left">Score</a>
-		<a href="#social" class="menu_right">Social media</a>
-	</nav>
+    <!-- Animated particles -->
+    <div class="particles" id="particles"></div>
 
-	<div id="flex_container">
-		<div id="left_side">
-			<h2 id="contact">About me</h2>
-			<img src="assets/photo.jpg" alt="My photo" width="200" height="200">
-			<p><em>I am student at Hutech university</em></p>
-			<ul>
-				<li><strong>Fullname</strong>: Quang Tran</li>
-				<li><strong>Country</strong>: VietNam</li>
-			</ul>
-			<h2 id="education">Education</h2>
-			<ol>
-				<li>Binh Tan Highschool</li>
-				<li>Hutech University</li>
-			</ol>
-			<h2 id="score">Scores</h2>
-			<table >
-				<tr>
-					<th rowspan="2"></th>
-					<th colspan="2">Math</th>
-					<th rowspan="2">Physics</th>
-					<th rowspan="2">IT</th>
-				</tr>
-				<tr>
-					<th>Math 1</th>
-					<th>Math 2</th>		
-				</tr>
-				<tr>
-					<th>2019</th>
-					<td>7</td>
-					<td>0</td>
-					<td>6</td>
-					<td>10</td>
-				</tr>
-				<tr>
-					<th>2020</th>
-					<td>9</td>
-					<td>0</td>
-					<td>7</td>
-					<td>10</td>
-				</tr>
-				<tr>
-					<th>2021</th>
-					<td>10</td>
-					<td>0</td>
-					<td>8</td>
-					<td>10</td>
-				</tr>
-			</table>
-			<h2 id="social">Social Media</h2>
-			<p><strong>Youtube: </strong><a href="https://youtube.com/@Quangcst">Quangcst</a></p>
-			<p><strong>Facebook: </strong><a href="http://facebook.com/TranMinhQuang204">Trần Minh Quang</a></p>
-		</div>
+    <!-- Main content -->
+    <div class="container">
+        <div class="content">
+            <div class="icon-container">
+                <div class="spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+            </div>
 
-		<div id="right_side">
-			<img src="assets/5.jpg">
+            <h1>🚀 Portfolio Đang Cập Nhật</h1>
+            <p class="subtitle">Chúng tôi đang làm việc để mang đến trải nghiệm tốt hơn</p>
 
-			
-			
-			
-			
-		</div>
-	</div>
-	<footer>
-		Created by Quang - <a href="mailto:tranminhquang050299@gmail.com">My email</a>
-	</footer>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <p class="message">⏰ Vui lòng quay lại sau</p>
+
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Quang Tran | Portfolio</p>
+    </div>
+
+    <script>
+        // Generate animated particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Optional: Add more interactivity
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.body.style.background = `linear-gradient(135deg, 
+                hsl(${250 + x * 30}, 70%, ${60 + y * 10}%) 0%, 
+                hsl(${270 + x * 20}, 60%, ${50 + y * 10}%) 50%, 
+                hsl(${310 + x * 20}, 80%, ${70 + y * 10}%) 100%)`;
+        });
+    </script>
 </body>
 </html>
